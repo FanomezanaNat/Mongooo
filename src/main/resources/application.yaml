@@ -1,3 +1,7 @@
 spring:
   application:
     name: Mongooo
+  data:
+    mongodb:
+      uri: "${MONGO_URI}"
+      database: "${MONGO_DATABASE}"

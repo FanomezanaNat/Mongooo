@@ -1,4 +1,4 @@
-package com.test.mongooo.config.database;
+package com.test.mongooo.config.database.configuration;
 
 import com.mongodb.client.MongoClient;
 import io.flamingock.internal.core.external.store.AuditStore;
@@ -14,7 +14,7 @@ public class FlamingockAuditConfig {
   @Bean
   public MongoDBSyncTargetSystem mongoDBSyncTargetSystem(
       MongoClient mongoClient,
-      @Value("${MONGO_DATABASE}") String databaseName) {
+      @Value("${spring.data.mongodb.database}") String databaseName) {
     return new MongoDBSyncTargetSystem("mongodb-target", mongoClient, databaseName);
   }
 

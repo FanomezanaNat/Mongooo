@@ -1,0 +1,19 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+
+# Desactiver le demarrage automatique de Flamingock au boot Spring
+# si vous le declenchez manuellement via testSupport
+flamingock:
+  enabled: true
+
+logging:
+  level:
+
+
+    # Désactivation des logs Flapdoodle Embedded Mongo
+    de.flapdoodle.embed: OFF
+    de.flapdoodle.embed.mongo: OFF
+    de.flapdoodle.embed.process: OFF
+  # ou d'autres configurations propres a vos tests (logs, etc.)
