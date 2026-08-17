@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 @TargetSystem(id = "mongodb-target")
-@Change(id = "create-user-email-index", author = "fanomezana")
+@Change(id = "V001InitCollections", author = "fanomezana")
 @Slf4j
 public class _0001__CreateUsersIndex {
 

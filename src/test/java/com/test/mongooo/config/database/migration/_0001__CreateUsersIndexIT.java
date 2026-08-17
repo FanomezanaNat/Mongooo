@@ -1,10 +1,9 @@
-package com.test.mongooo.IT;
+package com.test.mongooo.config.database.migration;
 
 import static io.flamingock.support.domain.AuditEntryDefinition.APPLIED;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.test.mongooo.AbstractFlamingockIntegrationTest;
-import com.test.mongooo.config.database.migration._0001__CreateUsersIndex;
+import com.test.mongooo.AbstractIntegrationTest;
 import com.test.mongooo.config.database.schema.MongoSchema;
 import io.flamingock.springboot.testsupport.FlamingockSpringBootTestSupport;
 import java.util.List;
@@ -15,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 
-class CreateUsersIndexIT extends AbstractFlamingockIntegrationTest {
+class _0001__CreateUsersIndexIT extends AbstractIntegrationTest {
 
   @Autowired
   private FlamingockSpringBootTestSupport testSupport;

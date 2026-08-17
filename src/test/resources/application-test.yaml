@@ -10,8 +10,6 @@ flamingock:
 
 logging:
   level:
-
-
     # Désactivation des logs Flapdoodle Embedded Mongo
     de.flapdoodle.embed: OFF
     de.flapdoodle.embed.mongo: OFF

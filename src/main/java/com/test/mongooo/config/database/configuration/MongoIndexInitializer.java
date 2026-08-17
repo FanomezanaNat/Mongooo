@@ -131,7 +131,7 @@ public class MongoIndexInitializer {
 
     createIndexIfMissing(ops, new Index()
         .on(MongoSchema.Fields.EXPIRES_AT, Sort.Direction.ASC)
-        .expire(Duration.ofSeconds(0))
+        .expire(Duration.ofDays(90))
         .named("ttl_doc_locks_expires"), MongoSchema.Collections.DOC_LOCKS);
   }
 

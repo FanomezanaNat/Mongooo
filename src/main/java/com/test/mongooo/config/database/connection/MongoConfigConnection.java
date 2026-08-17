@@ -37,7 +37,4 @@ public class MongoConfigConnection {
     }
     return new SimpleMongoClientDatabaseFactory(mongoClient, databaseName);
   }
-
-
-
 }

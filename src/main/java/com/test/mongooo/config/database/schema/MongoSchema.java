@@ -52,6 +52,7 @@ public final class MongoSchema {
 
     // Champs des collections référentielles (repositories / doc_archival_config)
     public static final String REPO_ID = "repoId";
+    public static final String REPO_DOC_ID = "repoDocId";
     public static final String TYPE = "type";
     public static final String ENABLED = "enabled";
     private Fields() {
