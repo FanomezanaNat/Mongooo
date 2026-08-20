@@ -8,6 +8,7 @@ import com.test.mongooo.AbstractIntegrationTest;
 import com.test.mongooo.config.database.schema.MongoSchema;
 import io.flamingock.springboot.testsupport.FlamingockSpringBootTestSupport;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+@Slf4j
 class _0002_ShardCollectionsTest extends AbstractIntegrationTest {
 
   @Autowired
@@ -56,6 +58,8 @@ class _0002_ShardCollectionsTest extends AbstractIntegrationTest {
     assertHashedIndexPresent(MongoSchema.Collections.TASKS, "_id");
 
     String targetDbName = mongoTemplate.getDb().getName();
+    log.info(mongoTemplate.getCollectionNames()
+        .toString());
     assertCollectionIsSharded(targetDbName, MongoSchema.Collections.DOCS);
     assertCollectionIsSharded(targetDbName, MongoSchema.Collections.APPLICATION_DOCS);
     assertCollectionIsSharded(targetDbName, MongoSchema.Collections.TASKS);
@@ -88,17 +92,13 @@ class _0002_ShardCollectionsTest extends AbstractIntegrationTest {
   }
 
   private void assertCollectionIsSharded(String dbName, String collectionName) {
-    String collectionNamespace = dbName + "." + collectionName;
-    Document collectionConfig = mongoClient.getDatabase("config")
-        .getCollection("collections")
-        .find(new Document("_id", collectionNamespace))
-        .first();
-    assertThat(collectionConfig).as(
-            "Collection '" + collectionNamespace + "' should be registered in config.collections")
-        .isNotNull();
-    boolean isDropped = collectionConfig.getBoolean("dropped", false);
-    assertThat(isDropped).as("Collection '" + collectionNamespace
-            + "' should not be marked as dropped in config.collections")
-        .isFalse();
+    Document stats = mongoTemplate.getDb()
+        .runCommand(new Document("collStats", collectionName));
+
+    Boolean isSharded = stats.getBoolean("sharded");
+    assertThat(isSharded)
+        .as("Collection '%s.%s' should be sharded", dbName, collectionName)
+        .isNotNull()
+        .isTrue();
   }
 }
